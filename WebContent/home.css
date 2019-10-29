@@ -1,0 +1,33 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0 auto;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table-wrapper {
+    width: 50%;
+}
+
+button.detail-btn {
+    height: 2rem;
+    background: transparent;
+    cursor: pointer;
+}
+
+button.detail-btn:hover {
+    background: rgba(93, 94, 92, 0.2);
+}
+
+button.detail-btn#selected {
+    background: rgba(93, 94, 92, 0.2);
+}

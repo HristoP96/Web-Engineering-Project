@@ -1,0 +1,55 @@
+body {
+    background: black;
+    color: white;
+}
+
+form {
+    border: 1px solid white;
+    width: 30%;
+    padding: 10px;
+    margin: auto;
+    margin-top: 25vh;
+}
+
+form>div {
+    padding: 8px;
+}
+
+button {
+    margin-left: auto;
+    position: relative;
+    padding: 8px 15px;
+    background: forestgreen;
+    border-color: forestgreen;
+    border-radius: 20px;
+    color: white;
+}
+
+form>div:last-child {
+    text-align: right;
+}
+
+label {
+    text-align: left;
+}
+
+input {
+    float: right;
+}
+
+div.clearfix>input {
+    float: none;
+    margin-left: auto;
+    position: relative;
+    padding: 8px 15px;
+    background: forestgreen;
+    border-color: forestgreen;
+    border-radius: 20px;
+    color: white;
+}
+
+.clearfixdiv::after {
+    content: "";
+    clear: both;
+    display: table;
+}
