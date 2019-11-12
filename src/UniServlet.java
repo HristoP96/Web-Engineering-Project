@@ -1,24 +1,25 @@
-package com.fdiba.webeng;
 
 
 import java.io.IOException;
 import java.util.List;
-import javax.persistence.Query;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.fdiba.webeng.model.*;
+
+import com.fdiba.webeng.model.FacultyEntity;
 
 /**
- * Servlet implementation class RegisterServlet
+ * Servlet implementation class UniServlet
  */
-@WebServlet("/RegisterServlet")
-public class RegisterServlet extends HttpServlet {
+@WebServlet("/UniServlet")
+public class UniServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private static final String PERSISTENCE_UNIT_NAME = "Web_Engineering_Project";
@@ -27,7 +28,7 @@ public class RegisterServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterServlet() {
+    public UniServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,6 +38,8 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		
 		response.encodeRedirectURL("home.html");
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -45,64 +48,51 @@ public class RegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("username");
-		String firstName = request.getParameter("firstName");
-		String facultyNumber = request.getParameter("facultyNumber");
-		String lastName = request.getParameter("lastName");
-		String password = request.getParameter("password");
-		String passConf = request.getParameter("passConf");
-		
 		// TODO Auto-generated method stub
-//		System.out.println(request.getParameter("userName"));
-//		System.out.println(request.getParameter("firstName"));
-//		System.out.println(request.getParameter("lastName"));
-//		System.out.println(request.getParameter("password"));
-//		System.out.println(request.getParameter("passConf"));
+		String university = request.getParameter("university");
+		String faculty = request.getParameter("facultyName");
 		
-		UserEntity user = new UserEntity();
-		user.setUsername(username);
-		user.setFirstName(firstName);
-		user.setLastName(lastName);
-		user.setPassword(password);
-		user.setFacultyNumber(facultyNumber);
+		FacultyEntity fe = new FacultyEntity();
+		fe.setFaculty(faculty);
+		fe.setUniversity(university);
 		
-		createEntity(user);
+		createEntity(fe);
 		
 		readEntity();
 		response.sendRedirect("home.html");
-		
+
 	}
 	
-	public void createEntity(UserEntity user) {
+	public void createEntity(FacultyEntity fe) {
 		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		EntityManager em = factory.createEntityManager();
 		
 		em.getTransaction().begin();
 		
-		em.persist(user);
-        em.getTransaction().commit();
-
-        em.close();
+		em.persist(fe);
+		
+		em.getTransaction().commit();
+		
+		em.close();
 	}
 	
 	public void readEntity() 
 	{
 		EntityManager em = factory.createEntityManager();
         // read the existing entries and write to console
-        Query q = em.createQuery("select u from UserEntity u");
-        List<UserEntity> userList = q.getResultList();
-        for (UserEntity user : userList) {
+        Query q = em.createQuery("select f from FacultyEntity f");
+        List<FacultyEntity> facultyList = q.getResultList();
+        for (FacultyEntity faculty : facultyList) {
         	System.out.println("-------------------------");
-        	System.out.println(user.getUsername());
-            System.out.println(user.getFirstName());
-            System.out.println(user.getLastName());
-            System.out.println(user.getPassword());
-            System.out.println(user.getFacultyNumber());
+        	System.out.println(faculty.getFaculty());
+            System.out.println(faculty.getUniversity());
             
             
         }
-        System.out.println("Size: " + userList.size());
+        System.out.println("Size: " + facultyList.size());
 
 	}
+	
+	
 
 }

@@ -14,6 +14,7 @@ public class UserEntity {
 	private String firstName;
 	private String lastName;
 	private String password;
+	private String facultyNumber;
 	
 	public String getUsername() {
 		return username;
@@ -38,6 +39,12 @@ public class UserEntity {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getFacultyNumber() {
+		return facultyNumber;
+	}
+	public void setFacultyNumber(String facultyNumber) {
+		this.facultyNumber = facultyNumber;
 	}
 	
 	
